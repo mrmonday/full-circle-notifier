@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Robert Clipsham</author>
+ <class>FCNotify</class>
+ <widget class="QWidget" name="FCNotify">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>FCNotify</string>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <widget class="QWidget" name="formLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>581</width>
+     <height>381</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <property name="fieldGrowthPolicy">
+     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+    </property>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Notify for</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>60</height>
+       </size>
+      </property>
+      <widget class="QCheckBox" name="checkBoxMag">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>161</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Full Circle Magazine</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBoxPodcast">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>151</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Full Circle Podcast</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBoxNews">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Full Circle News</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Notification style</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="notificationStyle">
+      <property name="toolTip">
+       <string>What to do when a new issue or podcast is available</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="downloadLabel">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Download folder</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="downloadButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Choose folder</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="downloadFolderLabel">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>No folder chosen</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label">
+      <property name="locale">
+       <locale language="English" country="UnitedStates"/>
+      </property>
+      <property name="text">
+       <string>Update frequency</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QComboBox" name="updateFrequency">
+      <property name="toolTip">
+       <string>How often to check for updates</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="locale">
+       <locale language="English" country="UnitedStatesMinorOutlyingIslands"/>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Close</set>
+      </property>
+      <property name="centerButtons">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>downloadButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FCNotify</receiver>
+   <slot>chooseFolder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>163</x>
+     <y>123</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>102</x>
+     <y>-10</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxMag</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>FCNotify</receiver>
+   <slot>notifyMagToggle(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>196</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>135</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxNews</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>FCNotify</receiver>
+   <slot>notifyNewsToggle(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>47</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-7</x>
+     <y>186</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBoxPodcast</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>FCNotify</receiver>
+   <slot>notifyPodToggle(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>259</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-3</x>
+     <y>235</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>clicked(QAbstractButton*)</signal>
+   <receiver>FCNotify</receiver>
+   <slot>handleButtonBox(QAbstractButton*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>444</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>113</x>
+     <y>8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>notificationStyle</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>FCNotify</receiver>
+   <slot>notifyChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>327</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>9</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>updateFrequency</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>FCNotify</receiver>
+   <slot>updateChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>358</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>261</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>chooseFolder()</slot>
+  <slot>handleButtonBox(QAbstractButton*)</slot>
+  <slot>notifyMagToggle(bool)</slot>
+  <slot>notifyPodToggle(bool)</slot>
+  <slot>notifyNewsToggle(bool)</slot>
+  <slot>notifyChanged(int)</slot>
+  <slot>updateChanged(int)</slot>
+ </slots>
+</ui>
