@@ -3,7 +3,7 @@
 # -------------------------------------------------
 QT += network \
     xml
-TARGET = fcnotify
+TARGET = fcnotifier
 TEMPLATE = app
 SOURCES += main.cpp \
     fcnotify.cpp \

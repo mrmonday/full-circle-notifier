@@ -1,2 +1,8 @@
 syntax: glob
 *.o
+fcnotify.pro.user
+fcnotifier
+Makefile
+moc_*.cpp
+qrc_resources.cpp
+ui_fcnotify.h
