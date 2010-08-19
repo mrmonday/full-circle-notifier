@@ -59,7 +59,7 @@ int UpdateChecker::freqToMs(int freq)
 void UpdateChecker::checkForUpdates()
 {
     manager->get(QNetworkRequest(
-            QUrl("http://octarineparrot.com/assets/fcn/latest.json")));
+            QUrl("http://notifier.fullcirclemagazine.org/en/latest.json")));
 }
 
 void UpdateChecker::handleResponse(QNetworkReply *reply)
@@ -87,17 +87,17 @@ void UpdateChecker::handleResponse(QNetworkReply *reply)
             SLOT(triggerNotify(QNetworkReply*)), Qt::DirectConnection);
     if(json["mag"].toInt() > mag) {
         nam->get(QNetworkRequest(
-                QUrl("http://notifier.fullcirclemagazine.org/mag/"
+                QUrl("http://notifier.fullcirclemagazine.org/en/mag/"
                      + json["mag"].toString() + ".json")));
     }
     if(json["news"].toInt() > news) {
         nam->get(QNetworkRequest(
-                QUrl("http://notifier.fullcirclemagazine.org/news/"
+                QUrl("http://notifier.fullcirclemagazine.org/en/news/"
                      + json["news"].toString() + ".json")));
     }
     if(json["pod"].toInt() > pod) {
         nam->get(QNetworkRequest(
-                QUrl("http://notifier.fullcirclemagazine.org/pod/"
+                QUrl("http://notifier.fullcirclemagazine.org/en/pod/"
                      + json["pod"].toString() + ".json")));
     }
 
