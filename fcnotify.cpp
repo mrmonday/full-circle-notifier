@@ -20,6 +20,7 @@
 
 FCNotify::FCNotify(QWidget *parent) :
     QWidget(parent),
+    checkingUpdates(false),
     ui(new Ui::FCNotify)
 {
     ui->setupUi(this);
@@ -50,6 +51,20 @@ FCNotify::FCNotify(QWidget *parent) :
 FCNotify::~FCNotify()
 {
     delete ui;
+}
+
+void FCNotify::checkForUpdates()
+{
+    checkingUpdates = true;
+    emit checkUpdates();
+}
+
+void FCNotify::noUpdates()
+{
+    if(checkingUpdates) {
+        QMessageBox::information(this, tr("Full Circle Notifier"),
+                                 tr("No updates are currently available."));
+    }
 }
 
 void FCNotify::endApp()
@@ -268,6 +283,18 @@ void FCNotify::setupTimer()
     connect(this, SIGNAL(updateInterval(int)),
             updateChecker, SLOT(updateInterval(int)),
             Qt::QueuedConnection);
+    connect(this, SIGNAL(checkUpdates()), updateChecker,
+            SLOT(checkForUpdates()), Qt::QueuedConnection);
+    connect(updateChecker, SIGNAL(noUpdates()), this, SLOT(noUpdates()),
+            Qt::QueuedConnection);
+
+    QAction *quit = trayContextMenu->actions().at(0);
+
+    QAction *checkForUpdates = new QAction("Check for updates", this);
+    connect(checkForUpdates, SIGNAL(triggered()),
+            this, SLOT(checkForUpdates()), Qt::QueuedConnection);
+    trayContextMenu->insertAction(quit, checkForUpdates);
+    trayContextMenu->insertSeparator(quit);
 
     downloader = new Downloader(settings);
     downloader->moveToThread(downloader);

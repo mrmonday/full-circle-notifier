@@ -38,6 +38,7 @@ public:
 
 signals:
     void notify(QString title, QString desc, QString url);
+    void noUpdates();
     void addDownloadUrl(QUrl);
 
 private slots:
@@ -49,6 +50,7 @@ private slots:
 private:
     int freqToMs(int freq);
 
+    QString baseUrl;
     QJson::Parser *parser;
     QNetworkAccessManager *manager;
     FCSettings *settings;

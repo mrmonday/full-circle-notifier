@@ -19,6 +19,11 @@
 
 UpdateChecker::UpdateChecker(FCSettings *settings) : settings(settings)
 {
+    if(settings->value("notify/beta", false).toBool()) {
+        baseUrl = "http://notifier.fullcirclemagazine.org/beta/";
+    } else {
+        baseUrl = "http://notifier.fullcirclemagazine.org/";
+    }
 }
 
 void UpdateChecker::run()
@@ -59,7 +64,7 @@ int UpdateChecker::freqToMs(int freq)
 void UpdateChecker::checkForUpdates()
 {
     manager->get(QNetworkRequest(
-            QUrl("http://notifier.fullcirclemagazine.org/en/latest.json")));
+            QUrl(baseUrl + "en/latest.json")));
 }
 
 void UpdateChecker::handleResponse(QNetworkReply *reply)
@@ -85,22 +90,25 @@ void UpdateChecker::handleResponse(QNetworkReply *reply)
     QNetworkAccessManager *nam = new QNetworkAccessManager(this);
     connect(nam, SIGNAL(finished(QNetworkReply*)), this,
             SLOT(triggerNotify(QNetworkReply*)), Qt::DirectConnection);
+    bool updates = false;
     if(json["mag"].toInt() > mag) {
+        updates = true;
         nam->get(QNetworkRequest(
-                QUrl("http://notifier.fullcirclemagazine.org/en/mag/"
-                     + json["mag"].toString() + ".json")));
+                QUrl(baseUrl + "en/mag/" + json["mag"].toString() + ".json")));
     }
     if(json["news"].toInt() > news) {
+        updates = true;
         nam->get(QNetworkRequest(
-                QUrl("http://notifier.fullcirclemagazine.org/en/news/"
-                     + json["news"].toString() + ".json")));
+                QUrl(baseUrl + "en/news/" + json["news"].toString()+".json")));
     }
     if(json["pod"].toInt() > pod) {
+        updates = true;
         nam->get(QNetworkRequest(
-                QUrl("http://notifier.fullcirclemagazine.org/en/pod/"
-                     + json["pod"].toString() + ".json")));
+                QUrl(baseUrl + "en/pod/" + json["pod"].toString() + ".json")));
     }
-
+    if(!updates) {
+        emit noUpdates();
+    }
 }
 
 void UpdateChecker::triggerNotify(QNetworkReply *reply)

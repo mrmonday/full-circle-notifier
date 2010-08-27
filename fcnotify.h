@@ -34,6 +34,7 @@ public:
     ~FCNotify();
 
 signals:
+    void checkUpdates();
     void updateInterval(int);
 
 protected:
@@ -41,6 +42,7 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 private slots:
+    void checkForUpdates();
     void chooseFolder();
     void downloadProgress(qint64 received, qint64 total);
     void endApp();
@@ -51,6 +53,7 @@ private slots:
     void notifyMagToggle(bool checked);
     void notifyPodToggle(bool checked);
     void notifyNewsToggle(bool checked);
+    void noUpdates();
     void trayActivated(QSystemTrayIcon::ActivationReason reason);
     void updateChanged(int index);
 
@@ -62,6 +65,7 @@ private:
     void setupTimer();
     void toggleDownload();
 
+    bool checkingUpdates;
     QString clickedUrl;
     Downloader *downloader;
     FCSettings *settings;
