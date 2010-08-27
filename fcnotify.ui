@@ -170,6 +170,9 @@
         <property name="value">
          <number>24</number>
         </property>
+        <property name="format">
+         <string>Downloading: %p%</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -283,8 +286,8 @@
    <slot>handleButtonBox(QAbstractButton*)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>444</x>
-     <y>185</y>
+     <x>566</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
      <x>113</x>
@@ -324,6 +327,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>closeDownloadButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FCNotify</receiver>
+   <slot>cancelDownload()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>195</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>chooseFolder()</slot>
@@ -333,5 +352,6 @@
   <slot>notifyNewsToggle(bool)</slot>
   <slot>notifyChanged(int)</slot>
   <slot>updateChanged(int)</slot>
+  <slot>cancelDownload()</slot>
  </slots>
 </ui>

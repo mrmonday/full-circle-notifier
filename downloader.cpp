@@ -46,7 +46,9 @@ void Downloader::addUrl(QUrl url)
 
 void Downloader::cancelDownload()
 {
-    currentReply->abort();
+    if(downloading) {
+        currentReply->abort();
+    }
 }
 
 void Downloader::dlProgress(qint64 received, qint64 total)
@@ -67,8 +69,8 @@ void Downloader::download(QNetworkReply *reply)
     }
     reply->deleteLater();
     if(urls->length() > 0) {
-        QNetworkReply *rep = manager->get(QNetworkRequest(urls->dequeue()));
-        connect(rep, SIGNAL(downloadProgress(qint64,qint64)),
+        currentReply = manager->get(QNetworkRequest(urls->dequeue()));
+        connect(currentReply, SIGNAL(downloadProgress(qint64,qint64)),
                 this, SLOT(dlProgress(qint64,qint64)), Qt::QueuedConnection);
     }
     downloading = false;

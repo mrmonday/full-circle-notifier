@@ -76,6 +76,7 @@ void FCNotify::noUpdates()
     if(checkingUpdates) {
         QMessageBox::information(this, tr("Full Circle Notifier"),
                                  tr("No updates are currently available."));
+        checkingUpdates = false;
     }
 }
 
@@ -302,10 +303,10 @@ void FCNotify::setupTimer()
 
     QAction *quit = trayContextMenu->actions().at(0);
 
-    QAction *checkForUpdates = new QAction("Check for updates", this);
-    connect(checkForUpdates, SIGNAL(triggered()),
+    QAction *checkUpdates = new QAction("Check for updates", this);
+    connect(checkUpdates, SIGNAL(triggered()),
             this, SLOT(checkForUpdates()), Qt::QueuedConnection);
-    trayContextMenu->insertAction(quit, checkForUpdates);
+    trayContextMenu->insertAction(quit, checkUpdates);
     trayContextMenu->insertSeparator(quit);
 
     downloader = new Downloader(settings);
