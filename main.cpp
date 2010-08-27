@@ -31,10 +31,20 @@ int main(int argc, char *argv[])
     }
 
     if (!QSystemTrayIcon::isSystemTrayAvailable()) {
-        QMessageBox::critical(0, QObject::tr("Full Circle Notifier"),
-                              QObject::tr("Unable to find a system tray,"
-                                          " exitting."));
-        return 1;
+        // TODO: This is a workaround for a bug Ronnie reported - we should
+        //       look into replacing this
+        for(int i = 0; i < 3; i++) {
+            QThread::sleep(2);
+            if(QSystemTrayIcon::isSystemTrayAvailable()) {
+                break;
+            } else {
+                if(i < 3) continue;
+                QMessageBox::critical(0, QObject::tr("Full Circle Notifier"),
+                                      QObject::tr("Unable to find a system tray,"
+                                                  " exitting."));
+                return 1;
+            }
+        }
     }
 
     if (!QSystemTrayIcon::supportsMessages()) {
