@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Full Circle Notifier
+Comment=Notify users when a new issue of Full Circle Magazine is out.
+Exec=fcnotifier
+Icon=fcnotifier
+Terminal=false
+Type=Application
+Categories=Network;
+StartupNotify=true

@@ -225,7 +225,7 @@ void FCNotify::setupConfig()
 
 void FCNotify::setupIcons()
 {
-    QIcon fclogo(":/images/fclogo.png");
+    QIcon fclogo(":/assets/fclogo.png");
 
     trayContextMenu = new QMenu(this);
     trayContextMenu->addAction(tr("Quit"), this, SLOT(endApp()), 0);
@@ -233,6 +233,7 @@ void FCNotify::setupIcons()
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(fclogo);
     trayIcon->setContextMenu(trayContextMenu);
+    trayIcon->setToolTip("Full Circle Notifier");
     setWindowIcon(fclogo);
 }
 
