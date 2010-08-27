@@ -29,6 +29,9 @@ FCNotify::FCNotify(QWidget *parent) :
 
     // Hide progess bar
     ui->progressBar->setVisible(false);
+    QCommonStyle style;
+    ui->closeDownloadButton->setIcon(style.standardIcon(QStyle::SP_DialogCloseButton));
+    ui->closeDownloadButton->setVisible(false);
 
     // Set up icons
     setupIcons();
@@ -51,6 +54,15 @@ FCNotify::FCNotify(QWidget *parent) :
 FCNotify::~FCNotify()
 {
     delete ui;
+}
+
+void FCNotify::cancelDownload()
+{
+    emit abortDownload();
+    ui->progressBar->setVisible(false);
+    ui->closeDownloadButton->setVisible(false);
+    QMessageBox::information(this, tr("Full Circle Notifier"),
+                             tr("Download cancelled."));
 }
 
 void FCNotify::checkForUpdates()
@@ -302,6 +314,8 @@ void FCNotify::setupTimer()
             this, SLOT(downloadProgress(qint64,qint64)), Qt::QueuedConnection);
     connect(updateChecker, SIGNAL(addDownloadUrl(QUrl)),
             downloader, SLOT(addUrl(QUrl)), Qt::QueuedConnection);
+    connect(this, SIGNAL(abortDownload()), downloader, SLOT(cancelDownload()),
+            Qt::QueuedConnection);
     downloader->start();
 
     updateChecker->start();
@@ -322,6 +336,7 @@ void FCNotify::messageClicked()
 void FCNotify::downloadProgress(qint64 received, qint64 total)
 {
     ui->progressBar->setVisible(true);
+    ui->closeDownloadButton->setVisible(true);
     ui->progressBar->setMaximum(total);
     ui->progressBar->setValue(received);
 }

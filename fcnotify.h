@@ -34,6 +34,7 @@ public:
     ~FCNotify();
 
 signals:
+    void abortDownload();
     void checkUpdates();
     void updateInterval(int);
 
@@ -42,6 +43,7 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 private slots:
+    void cancelDownload();
     void checkForUpdates();
     void chooseFolder();
     void downloadProgress(qint64 received, qint64 total);

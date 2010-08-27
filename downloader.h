@@ -40,11 +40,13 @@ signals:
     void downloadProgress(qint64, qint64);
 
 private slots:
+    void cancelDownload();
     void download(QNetworkReply*);
     void dlProgress(qint64, qint64);
     void addUrl(QUrl);
 
 private:
+    QNetworkReply *currentReply;
     bool downloading;
     QNetworkAccessManager *manager;
     FCSettings *settings;
