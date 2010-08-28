@@ -47,3 +47,4 @@ OTHER_FILES += qtsingleapplication/qtsinglecoreapplication.pri \
     qtsingleapplication/QtLockedFile
 INCLUDEPATH += qtsingleapplication
 LIBS += -lqjson
+ICON = assets/fcnotifier.icns
