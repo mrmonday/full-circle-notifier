@@ -61,8 +61,12 @@ void FCNotify::cancelDownload()
     emit abortDownload();
     ui->progressBar->setVisible(false);
     ui->closeDownloadButton->setVisible(false);
-    QMessageBox::information(this, tr("Full Circle Notifier"),
-                             tr("Download cancelled."));
+    int perc = (ui->progressBar->value() - ui->progressBar->minimum())/
+               (ui->progressBar->maximum() - ui->progressBar->minimum());
+    if(perc != 1) {
+        QMessageBox::information(this, tr("Full Circle Notifier"),
+                                 tr("Download cancelled."));
+    }
 }
 
 void FCNotify::checkForUpdates()
