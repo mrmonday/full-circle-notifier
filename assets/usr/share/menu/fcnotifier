@@ -1,0 +1,3 @@
+?package(full-circle-notifier):needs="X11" section="Applications/Network/Communication"\
+  title="Full Circle Notifier" command="/usr/local/bin/fcnotifier" hints="full circle"\
+  icon="/usr/share/icons/fcnotifier.xpm"

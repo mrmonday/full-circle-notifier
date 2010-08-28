@@ -34,7 +34,9 @@ int main(int argc, char *argv[])
         // TODO: This is a workaround for a bug Ronnie reported - we should
         //       look into replacing this
         for(int i = 0; i < 3; i++) {
-            QThread::sleep(2);
+            QTimer t;
+            t.setSingleShot(true);
+            t.start(2000);
             if(QSystemTrayIcon::isSystemTrayAvailable()) {
                 break;
             } else {
