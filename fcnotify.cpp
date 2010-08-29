@@ -308,8 +308,7 @@ void FCNotify::setupTimer()
     QAction *quit = trayContextMenu->actions().at(0);
 
     QAction *checkUpdates = new QAction("Check for updates", this);
-    connect(checkUpdates, SIGNAL(triggered()),
-            this, SLOT(checkForUpdates()), Qt::QueuedConnection);
+    connect(checkUpdates, SIGNAL(triggered()), this, SLOT(checkForUpdates()));
     trayContextMenu->insertAction(quit, checkUpdates);
     trayContextMenu->insertSeparator(quit);
 
