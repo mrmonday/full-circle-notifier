@@ -59,6 +59,7 @@ int main(int argc, char *argv[])
     FCNotify w;
 
     a.setActivationWindow(&w);
+    a.setQuitOnLastWindowClosed(false);
 
     return a.exec();
 }
