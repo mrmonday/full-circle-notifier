@@ -128,6 +128,12 @@ void FCNotify::closeEvent(QCloseEvent *event)
     }
 }
 
+#ifdef Q_WS_MAC
+void FCNotify::trayActivated(QSystemTrayIcon::ActivationReason)
+{
+    // Context menu is shown with left click on OS X
+}
+#else
 void FCNotify::trayActivated(QSystemTrayIcon::ActivationReason reason)
 {
     switch (reason) {
@@ -137,6 +143,13 @@ void FCNotify::trayActivated(QSystemTrayIcon::ActivationReason reason)
     default:
         ;
     }
+}
+#endif
+
+void FCNotify::showConfig()
+{
+    setVisible(true);
+    raise();
 }
 
 void FCNotify::toggleDownload()
@@ -260,6 +273,7 @@ void FCNotify::setupIcons()
     QIcon fclogo(":/assets/fclogo.png");
 
     trayContextMenu = new QMenu(this);
+    trayContextMenu->addAction(tr("Preferences..."), this, SLOT(showConfig()), 0);
     trayContextMenu->addAction(tr("Quit"), this, SLOT(endApp()), 0);
 
     trayIcon = new QSystemTrayIcon(this);
@@ -305,7 +319,7 @@ void FCNotify::setupTimer()
     connect(updateChecker, SIGNAL(noUpdates()), this, SLOT(noUpdates()),
             Qt::QueuedConnection);
 
-    QAction *quit = trayContextMenu->actions().at(0);
+    QAction *quit = trayContextMenu->actions().at(1);
 
     QAction *checkUpdates = new QAction("Check for updates", this);
     connect(checkUpdates, SIGNAL(triggered()), this, SLOT(checkForUpdates()));

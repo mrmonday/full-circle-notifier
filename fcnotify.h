@@ -56,6 +56,7 @@ private slots:
     void notifyPodToggle(bool checked);
     void notifyNewsToggle(bool checked);
     void noUpdates();
+    void showConfig();
     void trayActivated(QSystemTrayIcon::ActivationReason reason);
     void updateChanged(int index);
 
