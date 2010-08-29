@@ -48,3 +48,5 @@ OTHER_FILES += qtsingleapplication/qtsinglecoreapplication.pri \
 INCLUDEPATH += qtsingleapplication
 LIBS += -lqjson
 ICON = assets/fcnotifier.icns
+RC_FILE = assets/fcnotifier.rc
+
