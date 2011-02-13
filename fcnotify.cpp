@@ -99,7 +99,7 @@ bool FCNotify::doClose(bool notify)
             settings->value("notify/podcast").toBool()) &&
            ui->downloadFolderLabel->text() == tr("No folder chosen")) {
             message = tr("Please choose a download folder.");
-        } else if(!settings->value("notify/mag").toBool() ||
+        } else if(!settings->value("notify/mag").toBool() &&
                   !settings->value("notify/podcast").toBool()) {
             message = tr("Notification style can only be <i>Notify</i> if "
                          "neither <i>Full Circle Magazine</i> nor <i>Full "
